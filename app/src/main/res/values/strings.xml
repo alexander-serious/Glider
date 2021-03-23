@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Glider</string>
+    <string name="edit_text_task_name">Task</string>
+    <string name="check_box_important">Important</string>
+</resources>
