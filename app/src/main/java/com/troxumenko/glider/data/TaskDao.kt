@@ -1,7 +1,6 @@
 package com.troxumenko.glider.data
 
 import androidx.room.*
-import com.troxumenko.glider.presentation.tasks.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 

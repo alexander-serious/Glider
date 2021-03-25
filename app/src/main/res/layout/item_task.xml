@@ -38,7 +38,7 @@
             android:layout_height="@dimen/space_24"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/space_8"
+            android:layout_marginEnd="@dimen/space_8"
             android:src="@drawable/ic_priority" />
     </RelativeLayout>
 
@@ -47,5 +47,5 @@
         android:layout_height="1dp"
         android:layout_marginStart="@dimen/space_8"
         android:layout_marginEnd="@dimen/space_8"
-        android:background="@color/light_dark" />
+        android:background="@color/dark" />
 </LinearLayout>
