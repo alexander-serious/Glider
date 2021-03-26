@@ -8,6 +8,24 @@
     <fragment
         android:id="@+id/tasksFragment"
         android:name="com.troxumenko.glider.presentation.tasks.TasksFragment"
-        android:label="fragment_tasks"
-        tools:layout="@layout/fragment_tasks" />
+        android:label="Tasks"
+        tools:layout="@layout/fragment_tasks">
+        <action
+            android:id="@+id/action_tasksFragment_to_taskManagerFragment"
+            app:destination="@id/taskManagerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskManagerFragment"
+        android:name="com.troxumenko.glider.presentation.taskmanager.TaskManagerFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_manager_task" >
+        <argument
+            android:name="task"
+            app:argType="com.troxumenko.glider.data.Task"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

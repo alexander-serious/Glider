@@ -6,6 +6,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import com.troxumenko.glider.databinding.FragmentTasksBinding
 import com.troxumenko.glider.extentions.onQueryTextChanged
 import com.troxumenko.glider.ui.BaseFragment
 import com.troxumenko.glider.ui.TasksAdapter
+import com.troxumenko.glider.util.exhaustive
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
@@ -57,6 +59,10 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(), TasksAdapter.OnItemC
                     viewModel.onTaskSwiped(task)
                 }
             }).attachToRecyclerView(recyclerViewTasks)
+
+            fabAddTask.setOnClickListener {
+                viewModel.onTaskManagerClick()
+            }
         }
 
         viewModel.tasks.observe(viewLifecycleOwner) {
@@ -72,7 +78,15 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(), TasksAdapter.OnItemC
                             .setAction("UNDO") { viewModel.onUndoDeleteClick(event.task) }
                             .show()
                     }
-                }
+                    is TasksViewModel.TasksEvent.NavigateToAddTaskScreen -> {
+                        val action = TasksFragmentDirections.actionTasksFragmentToTaskManagerFragment(null, "Add Task")
+                        findNavController().navigate(action)
+                    }
+                    is TasksViewModel.TasksEvent.NavigateToEditTaskScreen -> {
+                        val action = TasksFragmentDirections.actionTasksFragmentToTaskManagerFragment(event.task, "Edit Task")
+                        findNavController().navigate(action)
+                    }
+                }.exhaustive
             }
         }
 
